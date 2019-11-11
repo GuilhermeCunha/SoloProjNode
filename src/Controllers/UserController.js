@@ -72,13 +72,13 @@ module.exports = {
         var { email, senha } = req.body;
 
         var user = await User.findOne({ email, senha});
-
+        //ok
         if(user){
             res.status(200).json({
                 email,
                 senha,
-                nome,
-                celular,
+                nome: user.nome,
+                celular: user.celular,
                 sucesso: true
             });
         }else{
