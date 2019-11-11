@@ -4,9 +4,7 @@ const User = require('../Models/User');
 module.exports = {
     async listarUsuarios(req, res){
         const users = await User.find();
-        return res.json({
-            usuarios:users
-        });
+        return res.json(users);
     },
     async criarUsuario(req, res){
         const { email, nome, senha, celular } = req.body;
@@ -77,6 +75,10 @@ module.exports = {
 
         if(user){
             res.status(200).json({
+                email,
+                senha,
+                nome,
+                celular,
                 sucesso: true
             });
         }else{
