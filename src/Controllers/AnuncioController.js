@@ -7,8 +7,9 @@ module.exports = {
         return res.json(anuncios);
     },
     async criarAnuncio(req, res){
-        const { nome, preco, mensagem } = req.body;
+        const { id, nome, preco, mensagem } = req.body;
         var anuncio = await Anuncio.create({
+            id,
             nome,
             preco,
             mensagem,
@@ -25,9 +26,10 @@ module.exports = {
         }
     },
     async editarAnuncio(req, res){
-        const { nome, preco, mensagem } = req.body;
+        const { id, nome, preco, mensagem } = req.body;
         
-        const sucesso = await Anuncio.findOneAndUpdate({ nome }, { 
+        const sucesso = await Anuncio.findOneAndUpdate({ id }, { 
+            nome,
             preco, 
             mensagem,
         }).then(function(result){
@@ -47,8 +49,8 @@ module.exports = {
         }
     },
     async removerAnuncio(req, res){
-        const { nome } = req.body;
-        const sucesso = await Anuncio.findOneAndRemove({ nome },function(err,result){
+        const { id } = req.body;
+        const sucesso = await Anuncio.findOneAndRemove({ id },function(err,result){
             if(err) return false;
             return true;
         });

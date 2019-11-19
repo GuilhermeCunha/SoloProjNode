@@ -9,13 +9,14 @@ module.exports = {
         return res.json(users);
     },
     async criarUsuario(req, res){
-        const { email, nome, senha, celular } = req.body;
+        const { email, nome, senha, celular, cpf} = req.body;
 
         var user = await User.create({
             nome,
             email,
             senha,
             celular,
+            cpf
         });
         if(user){
             NodeMailer.sendMail(email, "SEJA BEM VINDO!", 
@@ -32,13 +33,14 @@ module.exports = {
         
     },
     async editarUsuario(req, res){
-        const { email, nome, senha, celular } = req.body;
+        const { email, nome, senha, celular, cpf } = req.body;
         
         const sucesso = await User.findOneAndUpdate({ email}, {
             email, 
             nome, 
             senha, 
             celular,
+            cpf,
         }).then(function(result){
             return true;
         }).catch(e =>{

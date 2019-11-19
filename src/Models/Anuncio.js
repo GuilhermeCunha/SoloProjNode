@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 
 const AnuncioSchema = new mongoose.Schema({
+    id: Number,
     nome: String,
     preco: Number,
     mensagem: String,
