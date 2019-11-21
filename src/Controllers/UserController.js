@@ -1,8 +1,7 @@
 require('dotenv/config');
 const User = require('../Models/User');
 const NodeMailer = require('./../../lib/NodeMailer');
-//const NodeMailerObject = NodeMailer.NodeMailer();
-
+const NodeMailerObject = new NodeMailer.NodeMailer();
 module.exports = {
     async listarUsuarios(req, res){
         const users = await User.find();
@@ -19,7 +18,7 @@ module.exports = {
             cpf
         });
         if(user){
-            NodeMailer.sendMail(email, "SEJA BEM VINDO!", 
+            NodeMailerObject.sendMail(email, "SEJA BEM VINDO!", 
             "<strong>Conta criada com sucesso!</strong>");
             res.status(200).json({
                 sucesso: true
